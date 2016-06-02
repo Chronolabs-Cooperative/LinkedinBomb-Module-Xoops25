@@ -1,0 +1,48 @@
+<h1><{$smarty.const._AM_LINKEDINBOMB_IMS_H1}></h1>
+<p><{$smarty.const._AM_LINKEDINBOMB_IMS_P}></p>
+<div style="clear:both; height:45px;">
+	<div style="float:right; height:45px;"><{$pagenav}></div>
+</div>
+
+<form action="<{$php_self}>" method='post'>
+<table>
+	<tr class="head">
+		<th>Picture</th>
+		<th>Name</th>
+		<th>IM Type</th>
+		<th>IM Address</th>
+		<th>Location</th>
+		<th>Created</th>
+		<th>Updated</th>
+		<th>Actions</th>
+	</tr>
+	<{foreach item=item from=$ims}>
+	<tr class="<{cycle values='even,odd'}>">
+		<td align='center'><img src="<{$item.profile.picture_url}>"/></td>
+		<td align='center'><{$item.profile.formatted_name}></td>
+		<td align='center'><a target='_blank' href="<{$item.profile.public_profile_url}>"><{$item.im_account_type}></a></td>
+		<td align='center'><{$item.im_account_name}></td>
+		<td align='right'><{$item.profile.location.name}></td>
+		<td align='right'><{$item.created}></td>
+		<td align='right'><{$item.updated}></td>
+		<td align='right'><img onclick="LIBToggleBlock2('<{$xoops_url}>/modules/linkedinbomb', 'profile_<{$item.profile_id}>', 'image_<{$item.profile_id}>');" id='image_<{$item.profile_id}>' src='<{$xoops_url}>/modules/linkedinbomb/images/minus.png'></td>
+	</tr>
+	<tr class="<{cycle values='odd,even'}>" style="display:none;" id="profile_<{$item.profile_id}>">
+		<td colspan="9">
+			<{includeq file="db:linkedinbomb_profile.html" profile=$item.profile}>
+		</td>
+	</tr>
+	<{/foreach}>
+	<tr class="foot">
+		<td colspan="9">&nbsp;</td>
+	</tr>
+</table>
+<input type='hidden' name='op' value='ims'/>
+<input type='hidden' name='fct' value='savelist'/>
+<input type='hidden' name='start' value='<{$start}>'/>
+<input type='hidden' name='limit' value='<{$limit}>'/>
+<input type='hidden' name='order' value='<{$order}>'/>
+<input type='hidden' name='sort' value='<{$sort}>'/>
+<input type='hidden' name='filter' value='<{$filter}>'/>
+</form>
+

@@ -1,0 +1,73 @@
+<h1><{$smarty.const._AM_LINKEDINBOMB_PROVIDERS_H1}></h1>
+<p><{$smarty.const._AM_LINKEDINBOMB_PROVIDERS_P}></p>
+<div style="clear:both; height:45px;">
+	<div style="float:right; height:45px;"><{$pagenav}></div>
+</div>
+
+<table>
+	<tr class="head">
+		<th>Picture</th>
+		<th>Name</th>
+		<th>Twitter</th>
+		<th>Headline</th>
+		<th>Location</th>
+		<th>Created</th>
+		<th>Updated</th>
+		<th>Actions</th>
+	</tr>
+	<{foreach item=item from=$providers}>
+	<tr class="<{cycle values='even,odd'}>">
+		<td align='center'><img src="<{$item.profile.picture_url}>"/></td>
+		<td align='center'><{$item.profile.formatted_name}></td>
+		<td align='center'><a target='_blank' href="http://www.twitter.com/<{$item.provider_account_name}>"><{$item.provider_account_name}></a></td>
+		<td align='center'><{$item.profile.headline}></td>
+		<td align='right'><{$item.profile.location.name}></td>
+		<td align='right'><{$item.created}></td>
+		<td align='right'><{$item.updated}></td>
+		<td align='right'><img onclick="LIBToggleBlock2('<{$xoops_url}>/modules/linkedinbomb', 'profile_<{$item.profile_id}>', 'image_<{$item.profile_id}>');" id='image_<{$item.profile_id}>' src='<{$xoops_url}>/modules/linkedinbomb/images/minus.png'></td>
+	</tr>
+	<tr class="<{cycle values='odd,even'}>">
+		<td>&nbsp;</td>
+		<td colspan="8">
+			<div style="display:none;" id="profile_<{$item.profile_id}>">
+				<div>
+					<form action="<{$php_self}>" method='post'>
+					<table>
+						<tr>
+							<td>Tweet:</td>
+							<td><input type="text" size="35" maxlen="120" name="<{$item.profile_id}>[tweet]"/></td>
+						</td>
+						<tr>
+							<td>Mention Twitter Account:</td>
+							<td><input type="hidden" value="@<{$item.provider_account_name}>" name="<{$item.profile_id}>[pretext]"/>@<{$item.provider_account_name}></td>
+						</td>
+						<tr>
+							<td>Campaign:</td>
+							<td><{$item.campaign}></td>
+						</td>
+						<tr>
+							<td>Send Tweet:</td>
+							<td><input type="submit" value="<{$smarty.const._SUBMIT}>" name="submit"/></td>
+						</td>
+					</table>
+					<input type='hidden' name='op' value='twitter'/>
+					<input type='hidden' name='fct' value='send'/>
+					<input type='hidden' name='profile_id' value='<{$item.profile_id}>'/>
+					<input type='hidden' name='person_id' value='<{$item.person_id}>'/>
+					<input type='hidden' name='start' value='<{$start}>'/>
+					<input type='hidden' name='limit' value='<{$limit}>'/>
+					<input type='hidden' name='order' value='<{$order}>'/>
+					<input type='hidden' name='sort' value='<{$sort}>'/>
+					<input type='hidden' name='filter' value='<{$filter}>'/>
+					</form>
+				</div>
+				<{includeq file="db:linkedinbomb_profile.html" profile=$item.profile}>
+			</div>
+		</td>
+	</tr>
+	<{/foreach}>
+	<tr class="foot">
+		<td colspan="9">&nbsp;</td>
+	</tr>
+</table>
+

@@ -1,0 +1,196 @@
+<{if $profile.picture_url}>
+<div class="profile_picture">
+	<img src="<{$profile.picture_url}>"/>
+</div>
+<{/if}>
+<{if $profile.formatted_name}>
+<div class="profile_formatedname">
+	<h2>Name</h2>
+	<a href="<{$profile.public_profile_url}>"><{$profile.formatted_name}></a>
+</div>
+<{/if}>
+<{if $profile.location}>
+<div class="profile_location">
+	<h2>Locations</h2>
+	<{$profile.location.name}>, <{$profile.location.country.name}> (<{$profile.location.country.code}>) 
+</div>
+<{/if}>
+<{if $profile.main_address}>
+<div class="profile_address">
+	<h2>Address</h2>
+	<{$profile.main_address}>
+</div>
+<{/if}>
+<{if $profile.headline}>
+<div class="profile_headline">
+	<h2>Headline</h2>
+	<{$profile.headline}>
+</div>
+<{/if}>
+<{if $profile.industry}>
+<div class="profile_industry">
+	<h2>Industry</h2>
+	<{$profile.industry}>
+</div>
+<{/if}>
+<{if $profile.num_connections}>
+<div class="profile_numconnections">
+	<h2>Number of Connections</h2>
+	<{$profile.num_connections}>
+</div>
+<{/if}>
+<{if $profile.summary}>
+<div class="profile_summary">
+	<h2>Summary</h2>
+	<{$profile.summary}>
+</div>
+<{/if}>
+<{if $profile.specialities}>
+<div class="profile_specialities">
+	<h2>Specialities</h2>
+	<{$profile.specialities}>
+</div>
+<{/if}>
+<{if $profile.proposal_comments}>
+<div class="profile_proposal">
+	<h2>Proposals</h2>
+	<{$profile.proposal_comments}>
+</div>
+<{/if}>
+<{if $profile.associations}>
+<div class="profile_associations">
+	<h2>Associations</h2>
+	<{$profile.associations}>
+</div>
+<{/if}>
+<{if $profile.honors}>
+<div class="profile_honors">
+	<h2>Honors</h2>
+	<{$profile.honors}>
+</div>
+<{/if}>
+<{if $profile.skills}>
+<h2>Skills</h2>
+<div class="profile_skills">
+	<table>
+		<tr class="head">
+			<td>Skill</td>
+			<td>Proficiency</td>
+			<td>Years</td>
+		</tr>
+		<{foreach item=item from=$profile.skills}>
+		<tr class="<{cycle values='odd,even'}>">
+			<td><{$item.skill.name}></td>
+			<td><{$item.proficiency.name}></td>
+			<td><{$item.years.name}></td>
+		</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{/if}>
+<{if $profile.certifications}>
+<h2>Certification</h2>
+<div class="profile_cerifications">
+	<table>
+		<tr class="head">
+			<td>ID</td>
+			<td>Name</td>
+			<td>Authority</td>
+			<td>Number</td>
+		</tr>
+		<{foreach item=item from=$profile.certifications}>
+		<tr class="<{cycle values='odd,even'}>">
+			<td><{$item.id}></td>
+			<td><{$item.name}></td>
+			<td><{$item.authority.name}></td>
+			<td><{$item.number}></td>
+		</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{/if}>
+<{if $profile.companies}>
+<h2>Companies</h2>
+<div class="profile_companies">
+	<table>
+		<tr class="head">
+			<td>ID</td>
+			<td>Name</td>
+			<td>Industry</td>
+			<td>Position ID</td>
+			<td>Position Name</td>
+			<td>Position Current</td>
+			<td>Position Start Date</td>
+			<td>Position End Date</td>
+		</tr>
+		<{foreach item=item from=$profile.companies}>
+		<tr class="<{cycle values='odd,even'}>">
+			<td><{$item.company.id}></td>
+			<td><{$item.company.name}></td>
+			<td><{$item.company.industry}></td>
+			<td><{$item.position.id}></td>
+			<td><{$item.position.title}></td>
+			<td><{if $item.position.is_current eq 'true'}><{$smarty.const._YES}><{else}><{$smarty.const._NO}><{/if}></td>
+			<td><{$item.position.start_date}></td>
+			<td><{if $item.position.is_current eq 'true'}>Current<{else}><{$item.position.end_date}><{/if}></td>
+		</tr>
+		<{if $item.position.summary}>
+		<tr class="<{cycle values='even,odd'}>">
+			<td>&nbsp;</td>
+			<td colspan="7"><{$item.position.summary}></td>
+		</tr>
+		<{/if}>
+		<{/foreach}>
+	</table>
+</div>
+<{/if}>
+<{if $profile.courses}>
+<h2>Courses</h2>
+<div class="profile_courses">
+	<table>
+		<tr class="head">
+			<td>ID</td>
+			<td>Name</td>
+			<td>Number</td>
+		</tr>
+		<{foreach item=item from=$profile.courses}>
+		<tr class="<{cycle values='odd,even'}>">
+			<td><{$item.id}></td>
+			<td><{$item.name}></td>
+			<td><{$item.number}></td>
+		</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{/if}>
+<{if $profile.educations}>
+<h2>Education</h2>
+<div class="profile_educations">
+	<table>
+		<tr class="head">
+			<td>ID</td>
+			<td>School Name</td>
+			<td>Field of Study</td>
+			<td>Start Date</td>
+			<td>End Date</td>
+			<td>Degree</td>
+		</tr>
+		<{foreach item=item from=$profile.educations}>
+		<tr class="<{cycle values='odd,even'}>">
+			<td><{$item.id}></td>
+			<td><{$item.school_name}></td>
+			<td><{$item.field_of_study}></td>
+			<td><{$item.start_date}></td>
+			<td><{$item.end_date}></td>
+			<td><{$item.degree}></td>
+		</tr>
+		<{if $item.activities}>
+		<tr class="<{cycle values='even,odd'}>">
+			<td>&nbsp;</td>
+			<td colspan='5'><{$item.activities}></td>
+		</tr>
+		<{/if}>
+		<{/foreach}>
+	</table>
+</div>
+<{/if}>
